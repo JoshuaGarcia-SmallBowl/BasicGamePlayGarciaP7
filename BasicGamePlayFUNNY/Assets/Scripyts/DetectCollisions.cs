@@ -43,6 +43,7 @@ public class DetectCollisions : MonoBehaviour
                         Destroy(other.gameObject);
                     }
                 }
+
                 else
                 {
                     health--;
