@@ -11,13 +11,13 @@ public class healthmanager : MonoBehaviour
     public GameObject heart2;
     public GameObject heart3;
     public GameObject heart4;
-
+    public GameObject overtext;
 
     int health = 5;
     // Start is called before the first frame update
     void Start()
     {
-        
+        InvokeRepeating("recover", 0, 5);
     }
 
     // Update is called once per frame
@@ -88,7 +88,19 @@ public class healthmanager : MonoBehaviour
         health--;
         if (health == 0)
         {
-            Debug.Log("Gameovb");
+            overtext.SetActive(true);
+            
         }
+    }
+    void recover()
+    {
+        if (health < 5)
+        {
+            if (health > 0)
+            {
+                health++;
+            }
+        }
+        
     }
 }

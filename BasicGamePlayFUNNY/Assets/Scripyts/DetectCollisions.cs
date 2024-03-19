@@ -24,41 +24,46 @@ public class DetectCollisions : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-       
-        if (dodge == false)
+       if(other.transform.tag != "health")
         {
-
+            if (dodge == false)
             {
-                if (health == 1)
-                {
-                    if (splitter == true)
-                    {
-                        Split();
-                        splitter = false;
-                        Destroy(other.gameObject);
 
+                {
+                    if (health == 1)
+                    {
+                        if (splitter == true)
+                        {
+                            Split();
+                            splitter = false;
+                            Destroy(other.gameObject);
+
+                        }
+                        else
+                        {
+                            Destroy(gameObject);
+                            Destroy(other.gameObject);
+                        }
                     }
+
                     else
                     {
-                        Destroy(gameObject);
+                        health--;
                         Destroy(other.gameObject);
                     }
                 }
 
-                else
-                {
-                    health--;
-                    Destroy(other.gameObject);
-                }
+
             }
-            
-           
+            else
+            {
+                transform.position = new Vector3(Random.Range(-3, 3), 0, -2);
+                dodge = false;
+            }
         }
-        else
-        {
-            transform.position = new Vector3(Random.Range(-3, 3), 0, -2);
-            dodge = false;
-        }
+
+        
+        
  
         
        
