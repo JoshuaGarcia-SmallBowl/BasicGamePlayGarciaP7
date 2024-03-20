@@ -15,12 +15,23 @@ public class DetectCollisions : MonoBehaviour
     private float offsett;
     public bool regdod;
     private healthmanager abclol;
-    
+    public Slider healthslide;
+    private float maxhealth;
+    private bool maxset = false;
     // Start is called before th
    //e first frame update
     void Start()
     {
         abclol = GameObject.Find("helath!").GetComponent<healthmanager>();
+        if (health > 1 )
+        {
+            healthslide.maxValue = health;
+            healthslide.value = health;
+            healthslide.fillRect.gameObject.SetActive(false);
+        }
+        
+
+
     }
 
     // Update is called once per frame
@@ -57,9 +68,21 @@ public class DetectCollisions : MonoBehaviour
 
                         else
                         {
+                            if(maxset == false)
+                            {
+                                maxhealth = health;
+                                maxset = true;
+                            }
+
+                            
+                            
                             health--;
+                            healthslide.fillRect.gameObject.SetActive(false);
+                            healthslide.fillRect.gameObject.SetActive(true);
+                            healthslide.value = maxhealth - health;
                             Destroy(other.gameObject);
-                           
+                            
+
                         }
                     }
 
