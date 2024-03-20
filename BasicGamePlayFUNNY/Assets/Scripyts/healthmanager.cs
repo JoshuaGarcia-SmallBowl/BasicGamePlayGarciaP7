@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class healthmanager : MonoBehaviour
 {
@@ -12,7 +13,9 @@ public class healthmanager : MonoBehaviour
     public GameObject heart3;
     public GameObject heart4;
     public GameObject overtext;
-
+    private int score = 0;
+    public TMP_Text scoretext;
+    
     int health = 5;
     // Start is called before the first frame update
     void Start()
@@ -102,5 +105,10 @@ public class healthmanager : MonoBehaviour
             }
         }
         
+    }
+    public void scorey()
+    {
+        score += 1;
+        scoretext.text = "Score: " + score;
     }
 }

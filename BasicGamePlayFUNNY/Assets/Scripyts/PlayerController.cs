@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public float horizontalInput;
     public float verticalInput;
     public float speed = 20.0f;
     public float xRange = 10;
@@ -26,7 +27,9 @@ public class PlayerController : MonoBehaviour
     {
        //Movement
         verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * -verticalInput * Time.deltaTime * speed);
+        transform.Translate(Vector3.forward * horizontalInput * Time.deltaTime * speed);
         //Boundaries
         if (transform.position.x < -xRange)
         {
@@ -35,6 +38,14 @@ public class PlayerController : MonoBehaviour
         if (transform.position.x > xRange)
         {
             transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+        }
+        if (transform.position.z < 27)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, 27);
+        }
+        if (transform.position.z > 31)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, 31);
         }
         //Launcher Projectile Guy Worm Emoji
         if (Input.GetKeyDown(KeyCode.Space))
@@ -51,7 +62,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    heat += 15;
+                    heat += 14;
                     
                     heatbar.fillAmount = heat / 100;
                     overheat = true;

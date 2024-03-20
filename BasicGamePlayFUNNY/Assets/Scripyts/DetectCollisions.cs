@@ -2,19 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class DetectCollisions : MonoBehaviour
 {
-    public bool dodge = false;
+    public int dodge = 0;
     public int health = 1;
     public GameObject little;
     private float offset;
     public bool splitter;
-    // Start is called before the first frame update
+    public bool necro;
+    private float offsett;
+    public bool regdod;
+    private healthmanager abclol;
+    
+    // Start is called before th
+   //e first frame update
     void Start()
     {
-        
+        abclol = GameObject.Find("helath!").GetComponent<healthmanager>();
     }
 
     // Update is called once per frame
@@ -24,44 +30,58 @@ public class DetectCollisions : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-       if(other.transform.tag != "health")
+        if(other.transform.tag != "necro")
         {
-            if (dodge == false)
+            if (other.transform.tag != "health")
             {
-
+                if (dodge == 0)
                 {
-                    if (health == 1)
-                    {
-                        if (splitter == true)
-                        {
-                            Split();
-                            splitter = false;
-                            Destroy(other.gameObject);
 
+                    {
+                        if (health == 1)
+                        {
+                            if (splitter == true)
+                            {
+                                Split();
+                                splitter = false;
+                                Destroy(other.gameObject);
+
+                            }
+                            else
+                            {
+                                abclol.scorey();
+                                Destroy(gameObject);
+                                Destroy(other.gameObject);
+                            }
                         }
+
                         else
                         {
-                            Destroy(gameObject);
+                            health--;
                             Destroy(other.gameObject);
+                           
                         }
                     }
 
-                    else
-                    {
-                        health--;
-                        Destroy(other.gameObject);
-                    }
+
                 }
-
-
+                else
+                {
+                    transform.position = new Vector3(Random.Range(-3, 3), 0, -2);
+                    dodge -= 1;
+                }
             }
-            else
+
+        }
+        else
+        {
+            if (necro == true)
             {
-                transform.position = new Vector3(Random.Range(-3, 3), 0, -2);
-                dodge = false;
+                Reanimate();
+                necro = false;
             }
         }
-
+      
         
         
  
@@ -77,6 +97,18 @@ public class DetectCollisions : MonoBehaviour
         Vector3 downpos = new Vector3(-offset, 0, -3);
         Instantiate(little, downpos, transform.rotation);
         Destroy(gameObject);
+        
+    }
+
+    void Reanimate()
+    {
+        offsett = transform.position.x + 1;
+        Vector3 funnypos = new Vector3(offsett, 0, -3);
+        Instantiate(little, funnypos, transform.rotation);
+        Vector3 downposs = new Vector3(-offsett, 0, -3);
+        Instantiate(little, downposs, transform.rotation);
+        Vector3 downposss = new Vector3(Random.Range(-1, 1) * 2, 0, -3);
+        Instantiate(little, downposss, transform.rotation);
         
     }
 }
