@@ -88,12 +88,8 @@ public class healthmanager : MonoBehaviour
         }
     private void OnTriggerEnter(Collider other)
     {
-        health--;
-        if (health == 0)
-        {
-            overtext.SetActive(true);
-            
-        }
+        damage();
+       
     }
     void recover()
     {
@@ -110,5 +106,14 @@ public class healthmanager : MonoBehaviour
     {
         score += 1;
         scoretext.text = "Score: " + score;
+    }
+    public void damage()
+    {
+        health--;
+        if (health == 0)
+        {
+            overtext.SetActive(true);
+
+        }
     }
 }

@@ -41,58 +41,62 @@ public class DetectCollisions : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.tag != "necro")
+        if(!other.transform.CompareTag("necro"))
         {
-            if (other.transform.tag != "health")
+            if (!other.transform.CompareTag("health"))
             {
-                if (dodge == 0)
+                if (other.transform.CompareTag("projo"))
                 {
-
+                    if (dodge == 0)
                     {
-                        if (health == 1)
-                        {
-                            if (splitter == true)
-                            {
-                                Split();
-                                splitter = false;
-                                Destroy(other.gameObject);
 
+                        {
+                            if (health == 1)
+                            {
+                                if (splitter == true)
+                                {
+                                    Split();
+                                    splitter = false;
+                                    Destroy(other.gameObject);
+
+                                }
+                                else
+                                {
+                                    abclol.scorey();
+                                    Destroy(gameObject);
+                                    Destroy(other.gameObject);
+                                }
                             }
+
                             else
                             {
-                                abclol.scorey();
-                                Destroy(gameObject);
+                                if (maxset == false)
+                                {
+                                    maxhealth = health;
+                                    maxset = true;
+                                }
+
+
+
+                                health--;
+                                healthslide.fillRect.gameObject.SetActive(false);
+                                healthslide.fillRect.gameObject.SetActive(true);
+                                healthslide.value = maxhealth - health;
                                 Destroy(other.gameObject);
+
+
                             }
                         }
 
-                        else
-                        {
-                            if(maxset == false)
-                            {
-                                maxhealth = health;
-                                maxset = true;
-                            }
 
-                            
-                            
-                            health--;
-                            healthslide.fillRect.gameObject.SetActive(false);
-                            healthslide.fillRect.gameObject.SetActive(true);
-                            healthslide.value = maxhealth - health;
-                            Destroy(other.gameObject);
-                            
-
-                        }
                     }
-
-
+                    else
+                    {
+                        transform.position = new Vector3(Random.Range(-3, 3), 0, -2);
+                        dodge -= 1;
+                    }
                 }
-                else
-                {
-                    transform.position = new Vector3(Random.Range(-3, 3), 0, -2);
-                    dodge -= 1;
-                }
+               
             }
 
         }

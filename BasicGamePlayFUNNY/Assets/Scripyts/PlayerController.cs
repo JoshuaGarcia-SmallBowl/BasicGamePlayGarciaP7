@@ -15,11 +15,13 @@ public class PlayerController : MonoBehaviour
     private float heat;
     private bool overheat = false;
     public Image heatbar;
+    private healthmanager lol;
     
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("cool", 1.0f, 1.0f);
+        lol = GameObject.Find("helath!").GetComponent<healthmanager>();
     }
 
     // Update is called once per frame
@@ -39,9 +41,9 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
         }
-        if (transform.position.z < 27)
+        if (transform.position.z < 24)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 27);
+            transform.position = new Vector3(transform.position.x, transform.position.y, 24);
         }
         if (transform.position.z > 31)
         {
@@ -91,5 +93,16 @@ public class PlayerController : MonoBehaviour
             overheat = false;
            
         }
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(!other.CompareTag("projo"))
+        {
+            Destroy(other.gameObject);
+            lol.damage();
+        }
+        
     }
 }

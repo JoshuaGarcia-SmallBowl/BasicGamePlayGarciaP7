@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1013815964198628996}
   m_Layer: 0
   m_Name: food
-  m_TagString: Untagged
+  m_TagString: projo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0f149f60b931b45bcf41e60e63175d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
 --- !u!65 &7989908054192803392
 BoxCollider:
   m_ObjectHideFlags: 0
